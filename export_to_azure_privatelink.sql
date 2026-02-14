@@ -77,10 +77,10 @@ GRANT USAGE ON INTEGRATION azure_privatelink_integration TO ROLE SYSADMIN;
 
 USE ROLE SYSADMIN; -- Or your preferred role
 
-    CREATE OR REPLACE STAGE AICOLLEGE.PUBLIC.AZURE_PRIVATELINK_STAGE
-    URL = 'azure://<YOUR_STORAGE_ACCOUNT>.blob.core.windows.net/<YOUR_CONTAINER>/file_write/'
-    STORAGE_INTEGRATION = azure_privatelink_integration
-    FILE_FORMAT = (TYPE = CSV FIELD_OPTIONALLY_ENCLOSED_BY = '"' COMPRESSION = NONE);
+CREATE OR REPLACE STAGE AICOLLEGE.PUBLIC.AZURE_PRIVATELINK_STAGE
+URL = 'azure://<YOUR_STORAGE_ACCOUNT>.blob.core.windows.net/<YOUR_CONTAINER>/file_write/'
+STORAGE_INTEGRATION = azure_privatelink_integration
+FILE_FORMAT = (TYPE = CSV FIELD_OPTIONALLY_ENCLOSED_BY = '"' COMPRESSION = NONE);
 
 --------------------------------------------------------------------------------
 -- STEP 8: Export Data to Azure Blob Storage
