@@ -119,10 +119,3 @@ SHOW STORAGE INTEGRATIONS;
 
 -- To see detailed integration properties:
 DESC STORAGE INTEGRATION azure_privatelink_integration;
-
---------------------------------------------------------------------------------
--- CLEANUP (if needed)
---------------------------------------------------------------------------------
-
--- DROP STAGE AICOLLEGE.PUBLIC.AZURE_PRIVATELINK_STAGE;
--- DROP STORAGE INTEGRATION azure_privatelink_integration;
