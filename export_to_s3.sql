@@ -1,0 +1,22 @@
+-- Export Snowflake Data to External S3 Bucket
+-- This script creates an external stage and exports data to S3
+
+-- Step 1: Create external stage with AWS credentials
+CREATE OR REPLACE STAGE AICOLLEGE.PUBLIC.S3_EXPORT_STAGE_DIRECT
+  URL = 's3://ngerald-demo-aws-1/file_write/'
+  CREDENTIALS = (
+    AWS_KEY_ID = '<YOUR_AWS_ACCESS_KEY_ID>'
+    AWS_SECRET_KEY = '<YOUR_AWS_SECRET_ACCESS_KEY>'
+  )
+  FILE_FORMAT = (TYPE = CSV FIELD_OPTIONALLY_ENCLOSED_BY = '"' COMPRESSION = NONE);
+
+-- Step 2: Export data to S3
+COPY INTO @AICOLLEGE.PUBLIC.S3_EXPORT_STAGE_DIRECT/consent_receipts_sample.csv
+FROM (SELECT * FROM CONSENT_MANAGEMENT.STREAMING.CONSENT_RECEIPTS LIMIT 100)
+FILE_FORMAT = (TYPE = CSV FIELD_OPTIONALLY_ENCLOSED_BY = '"' COMPRESSION = NONE)
+HEADER = TRUE
+SINGLE = TRUE
+OVERWRITE = TRUE;
+
+-- Step 3: Verify the export
+LIST @AICOLLEGE.PUBLIC.S3_EXPORT_STAGE_DIRECT;
